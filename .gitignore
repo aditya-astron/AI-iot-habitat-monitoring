@@ -1,23 +1,24 @@
-# Python
 __pycache__/
 *.py[cod]
-*.pyc
-*.pyo
-*.pyd
+*$py.class
 .Python
-env/
-venv/
+*.egg-info/
+.eggs/
+dist/
+build/
 .venv/
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Models & large files
-*.pkl
-*.pt
-*.h5
-*.joblib
-models/*
-results/*
-
-# Environment
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
 .env
+*.pkl
+*.joblib
+*.pt
+models/
+results/
+.idea/
+.vscode/
