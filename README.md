@@ -1,46 +1,98 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Production%20Ready-brightgreen?style=for-the-badge&logo=python&logoColor=white" alt="Status">
-  <img src="https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/AI%20%26%20IoT-Habitat%20Monitoring-blue?style=for-the-badge" alt="Domain">
-  <img src="https://img.shields.io/badge/Impact-+45%25%20Accuracy%20%E2%86%91%20%20-32%25%20Time%20%E2%86%93-success?style=for-the-badge" alt="Impact">
-</p>
+# HabitatGuard-AI: AI-Powered Habitat Monitoring
 
-<h1 align="center">🌿 HabitatGuard-AI</h1>
-<h3 align="center">AI-Powered Habitat Monitoring with IoT Sensors</h3>
+[![Python CI](https://github.com/aditya-astron/AI-iot-habitat-monitoring/actions/workflows/python-ci.yml/badge.svg)](https://github.com/aditya-astron/AI-iot-habitat-monitoring/actions/workflows/python-ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-<p align="center">
-  <em>Increased decision accuracy by 45%<br>Reduced manual analysis time by 32%</em><br>
-  <strong>Full-stack AI + IoT solution: anomaly detection • resource optimization • structured GenAI reporting</strong>
-</p>
+An end-to-end IoT sensor logging and artificial intelligence dashboard designed to monitor and secure ecological habitats and space analog environments. Uses **Isolation Forest** algorithms for outlier detection, **linear programming** solvers for field resources scheduling, and structured **Large Language Model (LLM)** synthesis workflows for autonomous reporting.
 
-<br>
+---
 
-## 🎯 Key Achievements (Portfolio Highlight)
+## 🌌 System Architecture
 
-- 📈 **+45% decision accuracy** — from threshold-based (62%) to AI ensemble (90%)
-- ⏱️ **-32% analysis time** — automated workflows replace manual review
-- 🛰️ Real hardware ready: Raspberry Pi / ESP32 + DHT22 / MQ-135 / soil sensors
-- 🤖 Modern stack: Isolation Forest + Autoencoder + PuLP + GenAI (OpenAI-compatible)
+```mermaid
+graph TD
+    subgraph Edge Layer (ESP32/Arduino)
+        DHT[DHT22 / BMP280] -->|I2C| ESP[ESP32 Node]
+        MQ[MQ-135 / Gas Sensors] -->|Analog| ESP
+    end
 
-<br>
+    subgraph Data & Pipeline Layer
+        ESP -->|MQTT Telemetry| Broker[GCP MQTT Broker]
+        Broker -->|Ingest Stream| CSV[data/live_data.csv]
+    end
 
-## ✨ Features
+    subgraph Intelligence Engine
+        CSV -->|Parse| IFModel[Isolation Forest Classifier]
+        IFModel -->|Identify Anomalies| LP[PuLP Linear Solver]
+        LP -->|Optimized Field Plan| GenAI[GenAI Report Compiler]
+    end
 
-- 🔴 Real-time anomaly detection (Isolation Forest + deep autoencoder)
-- ⚡ AI resource optimization (drone / patrol scheduling with linear programming)
-- ✍️ Structured generative AI reports (Chain-of-Thought + JSON output)
-- 📊 Professional Streamlit dashboard
-- 🔌 IoT integration: MQTT simulation + real Arduino/ESP32 code
-- 📉 Reproducible metrics & evaluation script
+    subgraph Frontend User Interface
+        IFModel & LP & GenAI -->|Visualize| UI[Streamlit UI Dashboard]
+    end
+```
 
-<br>
+---
 
-## 🚀 Quick Start (30 seconds)
+## 🎯 Key Achievements
+
+*   📈 **+45% Decision Accuracy**: Transitioned from baseline manual threshold comparisons (62% accuracy) to multidimensional Isolation Forest ensembles (90% accuracy).
+*   ⏱️ **-32% Analysis Time**: Automated telemetry monitoring pipelines replace manual chart inspects, yielding structured reports instantly.
+*   🔌 **Hardware Ready**: Integrates ESP32-compatible modular firmware designed for analogue environments.
+
+---
+
+## 📦 Project Directory Structure
+
+```text
+AI-iot-habitat-monitoring/
+├── .github/
+│   └── workflows/
+│       └── python-ci.yml           # CI verification pipeline
+├── arduino/
+│   └── habitat_sensor.ino          # ESP32/Arduino modular firmware
+├── src/
+│   ├── anomaly_detection.py        # Isolation Forest implementation
+│   ├── data_generator.py           # Telemetry generation simulations
+│   ├── genai_workflow.py           # CoT report compiler (Pydantic validator)
+│   ├── optimization.py             # Linear programming solvers (PuLP)
+│   └── utils.py                    # Plotly chart & model helpers
+├── app.py                          # Streamlit application dashboard
+├── evaluation.py                   # Performance benchmarking script
+├── requirements.txt                # Pinned library dependencies
+├── .gitignore                      # Workspace rules
+└── README.md                       # Documentation
+```
+
+---
+
+## 🚀 Setup & Execution
+
+### 1. Install Dependencies
+Ensure you have Python 3.10+ installed:
 
 ```bash
+# Clone the repository
 git clone https://github.com/aditya-astron/AI-iot-habitat-monitoring.git
 cd AI-iot-habitat-monitoring
-python -m venv venv
-source venv/bin/activate    # Windows: venv\Scripts\activate
+
+# Setup virtual environment
+python -m venv .venv
+source .venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
+```
+
+### 2. Run Benchmarks
+Run the evaluation model script to verify decision accuracy gains locally:
+```bash
+python evaluation.py
+```
+
+### 3. Start the Interactive Dashboard
+Launch the Streamlit dashboard:
+```bash
 streamlit run app.py
+```
+This starts a local development server at `http://localhost:8501`.

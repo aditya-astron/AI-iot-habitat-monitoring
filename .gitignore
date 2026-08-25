@@ -1,23 +1,19 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyc
-*.pyo
-*.pyd
-.Python
-env/
-venv/
-.venv/
-pip-log.txt
-pip-delete-this-directory.txt
+*$py.class
 
-# Models & large files
-*.pkl
-*.pt
-*.h5
-*.joblib
-models/*
-results/*
+# Trained models & runtime data
+models/
+data/
 
-# Environment
+# OS generated files
+.DS_Store
+*.swp
+*.swo
+
+# Environments
 .env
+.venv
+venv/
+env/
